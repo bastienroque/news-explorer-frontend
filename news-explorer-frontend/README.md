@@ -1,16 +1,77 @@
-# React + Vite
+# News Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+News Explorer is a React-based web application that allows users to search for news articles using the NewsAPI service, save articles to a personal collection, and manage authentication through protected routes.
 
-Currently, two official plugins are available:
+This project was developed as part of the TripleTen Brasil Web Development program.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+# Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Search news articles by keyword
+- User authentication and authorization
+- Protected routes for authenticated users
+- Save and remove articles from a personal collection
+- Responsive UI design
+- Form validation and error feedback
+- Persistent login sessions
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Stack
+
+## Frontend
+
+- React
+- React Router DOM
+- Vite
+
+## API
+
+- NewsAPI
+
+## Form Handling & Validation
+
+- Custom validation logic
+
+---
+
+# Add Environment Variables Section
+
+Create a `.env` file in the root directory (news-explorer-frontend) and add:
+VITE_NEWS_API_KEY=your_api_key (available at https://newsapi.org/)
+
+---
+
+# Project Structure
+
+src/
+├── assets/
+├── components/
+├── contexts/
+├── hooks/
+└── utils/
+
+---
+
+# Future Improvements
+
+- To be determined
+
+---
+
+# Architecture
+
+The application uses a component-based architecture with React Context for global state management and protected routing for authenticated pages.
+
+---
+
+# Author
+
+Developed by Bastien Roque
+
+---
+
+# Link to the repository
+
+https://github.com/bastienroque/news-explorer-frontend
