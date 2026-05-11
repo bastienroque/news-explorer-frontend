@@ -1,8 +1,7 @@
-import React from "react";
-
 const Preloader = () => {
   return (
     <div>
+      <div className="circle-preloader"></div>
       <div>Loading wheel</div>
       <p>Procurando notícias...</p>
     </div>

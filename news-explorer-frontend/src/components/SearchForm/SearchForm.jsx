@@ -1,4 +1,15 @@
+import { useContext, useState } from "react";
+import { SearchContext } from "../../context/SearchContext";
+
 const SearchForm = () => {
+  const { searchTerm, setSearchTerm, handleSubmitSearch } =
+    useContext(SearchContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    handleSubmitSearch(searchTerm);
+  };
   return (
     <div className="search-form container">
       <div className="search-form__text">
@@ -8,15 +19,24 @@ const SearchForm = () => {
           conta pessoal
         </p>
       </div>
-      <div className="search-form__search-bar">
+      <form
+        className="search-form__search-bar"
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <input
-          name="search input"
+          name="search"
+          value={searchTerm}
           className="search-form__input"
           type="text"
           placeholder="Inserir tema"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          required
         />
-        <button className="search-form__search-button">Procurar</button>
-      </div>
+        <button type="submit" className="search-form__search-button">
+          Procurar
+        </button>
+      </form>
     </div>
   );
 };

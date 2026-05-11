@@ -9,7 +9,7 @@
 .about__profile-picture {
   width: 100%;
   max-width: 464px;
-  max-width: 464px;
+  max-height: 464px;
   aspect-ratio: 1 / 1;
   border-radius: 100%;
   object-fit: cover;
@@ -22,7 +22,7 @@
 }
 
 .about__paragraph {
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Inter", "Arial", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
@@ -45,7 +45,11 @@
 
   .about__profile-picture {
     max-width: 232px;
-    max-width: 232px;
+    max-height: 232px;
+  }
+
+  .about__title {
+    font-size: 30px;
   }
 }
 
@@ -57,7 +61,8 @@
   }
 
   .about__profile-picture {
-    max-width: unset;
+    max-width: 100%;
+    max-height: 100%;
     align-self: center;
   }
 }

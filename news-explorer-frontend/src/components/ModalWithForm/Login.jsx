@@ -1,17 +1,46 @@
+import { useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
 import InputField from "./InputField";
 
 const Login = ({ onRegisterSwitch }) => {
+  const {
+    formValues,
+    formErrors,
+    isValid,
+    handleLoginChange,
+    handleLogin,
+    visibleErrors,
+  } = useForm();
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isValid) {
+    }
+  }, [formErrors, isValid]);
+
   return (
     <>
-      <form className="auth-form">
-        <InputField label="E-mail" placeholder="Insira e-mail" />
+      <form className="auth-form" onSubmit={handleLogin} noValidate>
         <InputField
+          name="email"
+          label="E-mail"
+          placeholder="Insira e-mail"
+          value={formValues.email}
+          onChange={handleLoginChange}
+        />
+        <p className="input-field__error">{visibleErrors.email}</p>
+        <InputField
+          name="password"
           label="Senha"
           placeholder="Insira a senha"
           type="password"
+          value={formValues.password}
+          onChange={handleLoginChange}
         />
+        <p className="input-field__error">{visibleErrors.password}</p>
 
-        <button className="auth-button">Entrar</button>
+        <button type="submit" className="auth-button">
+          Entrar
+        </button>
       </form>
       <p className="auth-switch">
         ou <span onClick={onRegisterSwitch}>Inscreva-se</span>

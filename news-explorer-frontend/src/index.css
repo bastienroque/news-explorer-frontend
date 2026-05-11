@@ -1,12 +1,13 @@
 @import url("./components/App/app.css");
 @import url("./components/Header/header.css");
+@import url("./components/About/about.css");
 @import url("./components/Footer/footer.css");
 @import url("./components/Main/newscard.css");
 @import url("./components/Main/newscardlist.css");
-@import url("./components/About/about.css");
 @import url("./components/SearchForm/searchform.css");
 @import url("./components/SearchForm/searchresults.css");
 @import url("./components/SavedNews/savednews.css");
 @import url("./components/SavedNews/savednewsheader.css");
 @import url("./components/ModalWithForm/authmodal.css");
+@import url("./components/Preloader/preloader.css");
 @import url("./components/NotFound/notfound.css");

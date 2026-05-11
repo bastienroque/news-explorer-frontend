@@ -1,8 +1,16 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./ProtectedRoute";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
+import ProtectedRoute from "../../utils/ProtectedRoute";
+import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+import { ModalContext } from "../../context/ModalContext";
+
+import { useAuth } from "../../hooks/useAuth";
+import { useModal } from "../../hooks/useModal";
+import { useNewsSearch } from "../../hooks/useNewsSearch";
+import { useSavedNews } from "../../hooks/useSavedNews";
+
 import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import About from "../About/About";
 import SearchForm from "../SearchForm/SearchForm";
 import SearchResults from "../SearchForm/SearchResults";
@@ -10,67 +18,126 @@ import SavedNews from "../SavedNews/SavedNews";
 import AuthModal from "../ModalWithForm/AuthModal";
 import Register from "../ModalWithForm/Register";
 import Login from "../ModalWithForm/Login";
+import Success from "../ModalWithForm/Success";
+import Footer from "../Footer/Footer";
 
 function App() {
-  const [modalType, setModalType] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const navigate = useNavigate();
 
-  const closeModal = () => {
-    setModalType(null);
-  };
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuth();
+  const {
+    MODAL_STATES,
+    modalState,
+    setModalState,
+    closeModal,
+    switchLogin,
+    switchRegister,
+  } = useModal();
 
-  const handleLogin = () => {
-    setModalType("login");
-  };
+  const {
+    newsData,
+    visibleCards,
+    setVisibleCards,
+    isLoading,
+    error,
+    hasSearched,
+    handleSubmitSearch,
+    handleShowMore,
+    searchTerm,
+    setSearchTerm,
+  } = useNewsSearch();
 
-  const handleRegister = () => {
-    setModalType("register");
+  const { isSaved, handleSave, handleRemove } = useSavedNews(searchTerm);
+
+  const handleLogOut = () => {
+    setIsLoggedIn(false);
+    navigate("/");
   };
 
   return (
     <>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <Header
-                onRegisterSwitch={handleRegister}
-                onLoginSwitch={handleLogin}
-                onClose={closeModal}
+      <ModalContext value={{ MODAL_STATES, setModalState, switchLogin }}>
+        <AuthContext
+          value={{ isLoggedIn, userData, setIsLoggedIn, setUserData }}
+        >
+          <SearchContext
+            value={{
+              newsData,
+              visibleCards,
+              setVisibleCards,
+              isLoading,
+              error,
+              hasSearched,
+              handleSubmitSearch,
+              handleShowMore,
+              searchTerm,
+              setSearchTerm,
+              isSaved,
+              handleSave,
+              handleRemove,
+            }}
+          >
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Header
+                      onLoginSwitch={switchLogin}
+                      onLogOut={handleLogOut}
+                    />
+                    <SearchForm />
+                    <SearchResults
+                      onShowMore={handleShowMore}
+                      onLoginSwitch={switchLogin}
+                    />
+                    <About />
+                    <Footer />
+                  </>
+                }
               />
-              <SearchForm />
-              <SearchResults />
-              <About />
-              <Footer />
-            </div>
-          }
-        />
-        <Route
-          path="/saved-news"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Header
-                onRegisterSwitch={handleRegister}
-                onLoginSwitch={handleLogin}
+              <Route
+                path="/saved-news"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Header
+                      onRegisterSwitch={switchRegister}
+                      onLogOut={handleLogOut}
+                    />
+                    <SavedNews />
+                    <Footer />
+                  </ProtectedRoute>
+                }
               />
-              <SavedNews />
-              <Footer />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-      <AuthModal
-        isOpen={modalType !== null}
-        onClose={closeModal}
-        title={modalType === "login" ? "Entrar" : "Inscreva-se"}
-      >
-        {modalType === "login" ? (
-          <Login onRegisterSwitch={handleRegister} onClose={closeModal} />
-        ) : (
-          <Register onLoginSwitch={handleLogin} onClose={closeModal} />
-        )}
-      </AuthModal>
+            </Routes>
+            <AuthModal
+              isOpen={modalState !== MODAL_STATES.CLOSED}
+              onClose={closeModal}
+              title={
+                modalState === MODAL_STATES.LOGIN
+                  ? "Entrar"
+                  : modalState === MODAL_STATES.REGISTER
+                    ? "Inscreva-se"
+                    : modalState === MODAL_STATES.SUCCESS
+                      ? "Cadastro concluído com sucesso!"
+                      : ""
+              }
+            >
+              {modalState === MODAL_STATES.LOGIN && (
+                <Login onRegisterSwitch={switchRegister} />
+              )}
+
+              {modalState === MODAL_STATES.REGISTER && (
+                <Register onLoginSwitch={switchLogin} />
+              )}
+
+              {modalState === MODAL_STATES.SUCCESS && (
+                <Success onLoginSwitch={switchLogin} />
+              )}
+            </AuthModal>
+          </SearchContext>
+        </AuthContext>
+      </ModalContext>
     </>
   );
 }
