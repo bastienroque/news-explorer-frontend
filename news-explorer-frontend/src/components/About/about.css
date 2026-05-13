@@ -37,7 +37,7 @@
 
 @media screen and (max-width: 768px) {
   .about {
-    flex-direction: row;
+    flex-direction: column;
     gap: 24px;
     padding-top: 32px;
     padding-bottom: 128px;

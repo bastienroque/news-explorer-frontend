@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: space-between;
   height: 80px;
+  padding-bottom: 26px;
 }
 
 .footer__paragraph {
@@ -33,10 +34,13 @@
 
 @media screen and (max-width: 768px) {
   .footer {
-    display: flex;
     gap: 38px;
-    height: 64px;
-    white-space: nowrap;
+    flex-direction: column-reverse;
+    align-items: start;
+    justify-content: space-between;
+    height: unset;
+    padding-top: 24px;
+    padding-bottom: 18px;
   }
 
   .footer__nav {

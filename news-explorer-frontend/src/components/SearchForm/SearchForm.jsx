@@ -5,11 +5,17 @@ const SearchForm = () => {
   const { searchTerm, setSearchTerm, handleSubmitSearch } =
     useContext(SearchContext);
 
+  const isEmpty = !searchTerm.trim();
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     handleSubmitSearch(searchTerm);
   };
+
   return (
     <div className="search-form container">
       <div className="search-form__text">
@@ -29,11 +35,15 @@ const SearchForm = () => {
           value={searchTerm}
           className="search-form__input"
           type="text"
-          placeholder="Inserir tema"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          required
+          placeholder="Insira um tema"
+          onChange={handleChange}
         />
-        <button type="submit" className="search-form__search-button">
+
+        <button
+          type="submit"
+          className="search-form__search-button"
+          disabled={isEmpty}
+        >
           Procurar
         </button>
       </form>

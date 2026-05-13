@@ -14,11 +14,6 @@ export const useNewsSearch = () => {
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleSubmitSearch = async (searchQuery) => {
-    if (!searchQuery.trim()) {
-      alert("Por favor, insira uma palavra-chave");
-      return;
-    }
-
     try {
       setIsLoading(true);
       setError(null);

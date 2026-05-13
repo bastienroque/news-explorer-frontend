@@ -75,6 +75,22 @@
   background-color: #2a65cc;
 }
 
+.search-form__search-button:disabled {
+  background: #e6e8eb;
+  border-color: #e6e8eb;
+  color: #b6bcbf;
+  cursor: not-allowed;
+}
+
+.search-form__error {
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ff0000;
+  padding-top: 4px;
+  height: 16px;
+}
+
 @media screen and (max-width: 768px) {
   .search-form {
     gap: 48px;

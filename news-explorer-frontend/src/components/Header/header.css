@@ -1,9 +1,10 @@
 .header {
   width: 100%;
+  max-width: 1440px;
   position: absolute;
   top: 0;
   display: flex;
-  justify-content: space-between;
+  justify-self: center;
 
   --color: #1a1b22;
   --color-shadow: #1a1b2220;

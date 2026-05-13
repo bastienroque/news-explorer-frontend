@@ -84,10 +84,7 @@ src/
 
 ## Future Improvements
 
-- Add article pagination
-- Implement dark mode
-- Improve accessibility
-- Add automated testing
+- To be determined
 
 ---
 

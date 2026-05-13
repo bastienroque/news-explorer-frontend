@@ -1,6 +1,5 @@
-import { useState, useContext } from "react";
-import { SearchContext } from "../context/SearchContext";
-import { newsApi } from "../utils/NewsApi";
+import { useState } from "react";
+import { saveNewsCard, removeNewsCard } from "../utils/storage";
 
 export const useSavedNews = (searchTerm) => {
   const [isSaved, setIsSaved] = useState(() => {
@@ -10,9 +9,10 @@ export const useSavedNews = (searchTerm) => {
   const handleSave = async (data) => {
     try {
       const keyword = searchTerm;
-      const savedCard = await newsApi.saveNewsCard(data, keyword);
+      const savedCard = await saveNewsCard(data, keyword);
 
-      setIsSaved((prev) => [savedCard, ...prev]);
+      const updated = JSON.parse(localStorage.getItem("saved-news")) || [];
+      setIsSaved(updated);
     } catch (error) {
       console.error("Erro ao salvar artigo :", error);
     }
@@ -21,7 +21,7 @@ export const useSavedNews = (searchTerm) => {
   const handleRemove = async (data) => {
     try {
       const keyword = searchTerm;
-      const removedCard = await newsApi.removeNewsCard(data, keyword);
+      const removedCard = await removeNewsCard(data, keyword);
 
       setIsSaved((prev) => prev.filter((card) => card.url !== removedCard.url));
     } catch (error) {

@@ -62,41 +62,6 @@ export class NewsApi {
       throw error;
     }
   }
-
-  async saveNewsCard(data, keyword) {
-    try {
-      const saved = JSON.parse(localStorage.getItem("saved-news")) || [];
-      const tempData = { ...data, keyword };
-
-      const exists = saved.some((item) => item.url === data.url);
-      if (exists) return tempData;
-
-      const updated = [tempData, ...saved];
-
-      localStorage.setItem("saved-news", JSON.stringify(updated));
-
-      return tempData;
-    } catch (error) {
-      console.error("Erro ao salvar artigo :", error);
-      throw error;
-    }
-  }
-
-  async removeNewsCard(data, keyword) {
-    try {
-      const saved = JSON.parse(localStorage.getItem("saved-news")) || [];
-      const tempData = { ...data, keyword };
-
-      const updated = saved.filter((item) => item.url !== tempData.url);
-
-      localStorage.setItem("saved-news", JSON.stringify(updated));
-
-      return data;
-    } catch (error) {
-      console.error("Erro ao salvar artigo :", error);
-      throw error;
-    }
-  }
 }
 
 export const newsApi = new NewsApi({});
