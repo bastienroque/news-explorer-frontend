@@ -1,0 +1,154 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal-wrapper {
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: -42px;
+  right: -42px;
+  background: transparent url("../../assets/close-cross-icon.svg") center
+    no-repeat;
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-box {
+  background: white;
+  padding: 32px 36px;
+  border-radius: 12px;
+  width: 430px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form__title {
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #2f71e5;
+  margin-top: 16px;
+}
+
+.form-group input {
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #00000020;
+}
+
+.form-group input::placeholder {
+  color: #000;
+  opacity: 0.2;
+}
+
+.form-group input:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #000;
+}
+
+.input-field__error {
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ff0000;
+  padding-top: 4px;
+  height: 16px;
+}
+
+.auth-button {
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  padding: 20px 115px;
+  background: #2f71e5;
+  color: white;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  margin-top: 42px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.auth-button:disabled {
+  background-color: #e6e8eb;
+  color: #b6bcbf;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.auth-switch span {
+  cursor: pointer;
+  color: #2f71e5;
+}
+
+.auth-success {
+  margin-top: 16px;
+}
+
+.auth-success span {
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+  color: #2f71e5;
+}
+
+@media screen and (max-width: 320px) {
+  .modal-wrapper {
+    width: 100%;
+    height: 100%;
+    padding-top: 56px;
+  }
+
+  .modal-close {
+    width: 16px;
+    height: 16px;
+    top: 20px;
+    right: 20px;
+  }
+
+  .modal-box {
+    padding: 16px;
+    height: 100%;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    width: unset;
+  }
+
+  .auth-button {
+    padding: 1em;
+  }
+}
