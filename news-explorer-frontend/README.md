@@ -34,7 +34,7 @@ This project was developed as part of the TripleTen Brasil Web Development progr
 ## Installation
 
 Clone the repository:
-git clone https://github.com/yourusername/news-explorer.git
+git clone https://github.com/bastienroque/news-explorer-frontend.git
 
 Navigate into the project directory:
 cd news-explorer-frontend
