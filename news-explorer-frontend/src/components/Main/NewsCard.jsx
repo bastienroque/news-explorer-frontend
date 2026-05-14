@@ -51,7 +51,9 @@ const NewsCard = ({ newsData }) => {
                   className="news-card__action-btn"
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
-                  onClick={() => handleSave(newsData)}
+                  onClick={() =>
+                    savedCards ? handleRemove(newsData) : handleSave(newsData)
+                  }
                 >
                   {" "}
                   {savedCards ? (

@@ -47,7 +47,10 @@ function App() {
     setSearchTerm,
   } = useNewsSearch();
 
-  const { isSaved, handleSave, handleRemove } = useSavedNews(searchTerm);
+  const { isSaved, handleSave, handleRemove } = useSavedNews(
+    searchTerm,
+    userData,
+  );
 
   const handleLogOut = () => {
     setIsLoggedIn(false);

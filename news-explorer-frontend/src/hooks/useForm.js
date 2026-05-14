@@ -47,10 +47,9 @@ export const useForm = () => {
     }
 
     if (!values.password) {
-      errors.password = "Senha é necessária";
-    } else if (values.password.length < 4) {
-      errors.password = "Por favor use uma senha maior";
+      errors.password = "A Senha é necessária";
     }
+
     return errors;
   };
 
@@ -112,7 +111,7 @@ export const useForm = () => {
     if (Object.keys(errors).length === 0) {
       setFormErrors({});
       setModalState(MODAL_STATES.SUCCESS);
-      setUserData({ name: formValues.username });
+      setUserData({ email: formValues.email, name: formValues.username });
     } else {
     }
   };
