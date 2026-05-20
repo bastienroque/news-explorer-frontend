@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { SearchContext } from "../context/SearchContext";
-import { newsApi } from "../utils/NewsApi";
+import { NewsApi } from "../utils/NewsApi";
 
 export const useNewsSearch = () => {
   const { isSaved, handleSave } = useContext(SearchContext);
@@ -19,7 +19,9 @@ export const useNewsSearch = () => {
       setError(null);
       setHasSearched(false);
 
-      const response = await newsApi.getNewsData(searchQuery);
+      const api = new NewsApi(import.meta.env.VITE_API_URL);
+
+      const response = await api.getNewsData(searchQuery);
 
       setHasSearched(true);
       setNewsData(response);
@@ -27,7 +29,7 @@ export const useNewsSearch = () => {
       setVisibleCards(3);
     } catch (error) {
       console.error(
-        "Desculpe, algo deu errado durante a solicitação. Pode haver um problema de conexão ou o servidor pode estar inativo. Por favor, tente novamente mais tarde.",
+        "Sorry, something went wrong during your request. There may be a connection issue, or the server may be down. Please try again later.",
         error,
       );
       setError(true);
