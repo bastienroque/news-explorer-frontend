@@ -65,7 +65,7 @@ const Header = ({ onLoginSwitch, onLogOut }) => {
             </li>
             <li>
               <button className="nav-link" onClick={onLogOut}>
-                {userData.name} <LogoutIcon className="icon" />
+                {userData.username} <LogoutIcon className="icon" />
               </button>
             </li>
           </ul>

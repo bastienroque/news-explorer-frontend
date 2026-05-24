@@ -12,7 +12,7 @@ const SavedNewsHeader = () => {
     <div className="saved-news-header container">
       <p className="saved-news-header__paragraph">Artigos salvos</p>
       <h2 className="saved-news-header__title">
-        {userData.name}, você tem {isSaved.length}{" "}
+        {userData.username}, você tem {isSaved.length}{" "}
         {isSaved.length === 1 ? "artigo" : "artigos"}{" "}
         {isSaved.length === 1 ? "salvo" : "salvos"}
       </h2>

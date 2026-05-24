@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import InputField from "./InputField";
 import { useForm } from "../../hooks/useForm";
+import InputField from "./InputField";
 
 const Register = ({ onLoginSwitch }) => {
   const {
@@ -27,7 +27,9 @@ const Register = ({ onLoginSwitch }) => {
           value={formValues.email}
           onChange={handleRegisterChange}
         />
-        <p className="input-field__error">{visibleErrors.email}</p>
+        <p className="input-field__error">
+          {visibleErrors.email || formErrors.email}
+        </p>
         <InputField
           name="password"
           label="Senha"
