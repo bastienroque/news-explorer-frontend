@@ -90,7 +90,7 @@ src/
 
 ## Link to the project
 
-https://news-explorer-frontend-1ct6yvau5-bastien-roque.vercel.app/
+https://news-explorer-git-stage-react-auth-bastien-roque.vercel.app/
 
 ---
 
