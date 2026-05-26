@@ -145,7 +145,7 @@ export const useForm = () => {
       setModalState(MODAL_STATES.CLOSED);
     } catch (err) {
       const msg = err.serverMessage;
-      if (msg === "No account found with this email") {
+      if (msg === "User doesn't exist") {
         setApiError("No account found with this email");
       } else if (msg === "Incorrect password") {
         setApiError("Incorrect password");
