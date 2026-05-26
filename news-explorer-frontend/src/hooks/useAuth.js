@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { mainApi } from "../utils/MainApi.js";
 
 export const useAuth = () => {
-  const [userData, setUserData] = useState({ email: "", name: "" });
+  const [userData, setUserData] = useState({ email: "", username: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const useAuth = () => {
 
       try {
         const data = await mainApi.getUserInfo();
-        setUserData(data);
+        setUserData({ email: data.email, username: data.username });
         setIsLoggedIn(true);
       } catch (error) {
         console.error("Authentication check failed:", error);
