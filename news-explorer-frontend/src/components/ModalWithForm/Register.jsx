@@ -23,7 +23,7 @@ const Register = ({ onLoginSwitch }) => {
         <InputField
           name="email"
           label="E-mail"
-          placeholder="Insira e-mail"
+          placeholder="Insert your email"
           value={formValues.email}
           onChange={handleRegisterChange}
         />
@@ -33,7 +33,7 @@ const Register = ({ onLoginSwitch }) => {
         <InputField
           name="password"
           label="Senha"
-          placeholder="Insira a senha"
+          placeholder="Insert your password"
           type="password"
           value={formValues.password}
           onChange={handleRegisterChange}
@@ -42,7 +42,7 @@ const Register = ({ onLoginSwitch }) => {
         <InputField
           name="username"
           label="Nome de usuário"
-          placeholder="Insira seu nome de usuário"
+          placeholder="Insert your username"
           value={formValues.username}
           onChange={handleRegisterChange}
         />

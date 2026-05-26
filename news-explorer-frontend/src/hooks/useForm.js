@@ -9,6 +9,7 @@ export const useForm = () => {
   const [touched, setTouched] = useState({});
   const [formErrors, setFormErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const { setIsLoggedIn, setUserData } = useContext(AuthContext);
   const { MODAL_STATES, setModalState } = useContext(ModalContext);
@@ -127,12 +128,11 @@ export const useForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setApiError("");
     setTouched({ email: true, password: true });
 
     const errors = validateLogin(formValues);
     setFormErrors(errors);
-
     if (Object.keys(errors).length > 0) return;
 
     try {
@@ -144,8 +144,14 @@ export const useForm = () => {
       setFormErrors({});
       setModalState(MODAL_STATES.CLOSED);
     } catch (err) {
-      console.error("Login failed:", err);
-      setFormErrors({ api: "Email ou senha incorretos" });
+      const msg = err.serverMessage;
+      if (msg === "No account found with this email") {
+        setApiError("No account found with this email");
+      } else if (msg === "Incorrect password") {
+        setApiError("Incorrect password");
+      } else {
+        setApiError("Login failed, please try again");
+      }
     }
   };
 
@@ -155,6 +161,7 @@ export const useForm = () => {
     setFormErrors,
     setFormValues,
     isValid,
+    apiError,
     handleRegisterChange,
     handleRegister,
     handleLoginChange,
