@@ -88,6 +88,12 @@ src/
 
 ---
 
+## Link to the project
+
+https://news-explorer-frontend-1ct6yvau5-bastien-roque.vercel.app/
+
+---
+
 ## Author
 
 Developed by Bastien Roque
