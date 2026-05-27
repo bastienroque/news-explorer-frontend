@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import InputField from "./InputField";
 import { useForm } from "../../hooks/useForm";
+import InputField from "./InputField";
 
 const Register = ({ onLoginSwitch }) => {
   const {
@@ -23,15 +23,17 @@ const Register = ({ onLoginSwitch }) => {
         <InputField
           name="email"
           label="E-mail"
-          placeholder="Insira e-mail"
+          placeholder="Insert your email"
           value={formValues.email}
           onChange={handleRegisterChange}
         />
-        <p className="input-field__error">{visibleErrors.email}</p>
+        <p className="input-field__error">
+          {visibleErrors.email || formErrors.email}
+        </p>
         <InputField
           name="password"
           label="Senha"
-          placeholder="Insira a senha"
+          placeholder="Insert your password"
           type="password"
           value={formValues.password}
           onChange={handleRegisterChange}
@@ -40,7 +42,7 @@ const Register = ({ onLoginSwitch }) => {
         <InputField
           name="username"
           label="Nome de usuário"
-          placeholder="Insira seu nome de usuário"
+          placeholder="Insert your username"
           value={formValues.username}
           onChange={handleRegisterChange}
         />

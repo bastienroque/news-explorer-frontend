@@ -7,6 +7,7 @@ const Login = ({ onRegisterSwitch }) => {
     formValues,
     formErrors,
     isValid,
+    apiError,
     handleLoginChange,
     handleLogin,
     visibleErrors,
@@ -23,7 +24,7 @@ const Login = ({ onRegisterSwitch }) => {
         <InputField
           name="email"
           label="E-mail"
-          placeholder="Insira e-mail"
+          placeholder="Insert your e-mail"
           value={formValues.email}
           onChange={handleLoginChange}
         />
@@ -31,7 +32,7 @@ const Login = ({ onRegisterSwitch }) => {
         <InputField
           name="password"
           label="Senha"
-          placeholder="Insira a senha"
+          placeholder="Insert your password"
           type="password"
           value={formValues.password}
           onChange={handleLoginChange}
@@ -41,6 +42,7 @@ const Login = ({ onRegisterSwitch }) => {
         <button type="submit" className="auth-button">
           Entrar
         </button>
+        {apiError && <p className="input-field__error">{apiError}</p>}
       </form>
       <p className="auth-switch">
         ou <span onClick={onRegisterSwitch}>Inscreva-se</span>

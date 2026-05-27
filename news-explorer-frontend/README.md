@@ -88,6 +88,12 @@ src/
 
 ---
 
+## Link to the project
+
+https://news-explorer-git-stage-react-auth-bastien-roque.vercel.app/
+
+---
+
 ## Author
 
 Developed by Bastien Roque

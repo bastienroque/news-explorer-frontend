@@ -15,8 +15,9 @@ const About = () => {
           TripleTen Brasil. <br></br>
           <br></br>Desenvolvo aplicações web completas, trabalhando tanto no
           front-end como no back-end. Tenho experiência com HTML, CSS,
-          JavaScript, TypeScript, React, Tailwind, REST APIs, Node.js, Express,
-          Redis, Upstash e Google Cloud Platform. <br></br>
+          JavaScript, TypeScript, React, Next, Tailwind, REST APIs, Node.js,
+          Express, Redis, Upstash, Vercel, Render e Google Cloud Platform.{" "}
+          <br></br>
           <br></br>A minha formação na TripleTen Brasil permitiu-me adquirir uma
           base sólida em desenvolvimento fullstack, através de projetos práticos
           avaliados por profissionais da área. Ao longo do percurso, desenvolvi

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ModalContext } from "../context/ModalContext";
+import { mainApi } from "../utils/MainApi.js";
 
 export const useForm = () => {
   const initialValues = { email: "", password: "", username: "" };
@@ -8,6 +9,7 @@ export const useForm = () => {
   const [touched, setTouched] = useState({});
   const [formErrors, setFormErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const { setIsLoggedIn, setUserData } = useContext(AuthContext);
   const { MODAL_STATES, setModalState } = useContext(ModalContext);
@@ -94,44 +96,63 @@ export const useForm = () => {
     }));
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
-    setTouched({
-      email: true,
-      password: true,
-      username: true,
-    });
+    setTouched({ email: true, password: true, username: true });
 
     const errors = validateRegister(formValues);
-
-    setFormErrors(errors);
-    setIsValid(true);
-
-    if (Object.keys(errors).length === 0) {
-      setFormErrors({});
-      setModalState(MODAL_STATES.SUCCESS);
-      setUserData({ email: formValues.email, name: formValues.username });
-    } else {
-    }
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    setTouched({
-      email: true,
-      password: true,
-    });
-
-    const errors = validateLogin(formValues);
     setFormErrors(errors);
 
     if (Object.keys(errors).length > 0) return;
-    setFormValues({ ...initialValues });
-    setFormErrors({});
-    setIsLoggedIn(true);
-    setModalState(MODAL_STATES.CLOSED);
+
+    try {
+      await mainApi.signup(
+        formValues.email,
+        formValues.password,
+        formValues.username,
+      );
+      setFormErrors({});
+      setModalState(MODAL_STATES.SUCCESS);
+      setUserData({ email: formValues.email, username: formValues.username });
+    } catch (error) {
+      if (error.serverMessage === "Email already in use") {
+        setFormErrors({
+          email: "Este email já está associado a outro utilizador",
+        });
+      } else {
+        setFormErrors({ api: "Falha no registro, tente novamente" });
+      }
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setApiError("");
+    setTouched({ email: true, password: true });
+
+    const errors = validateLogin(formValues);
+    setFormErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+
+    try {
+      const data = await mainApi.signin(formValues.email, formValues.password);
+      localStorage.setItem("jwt", data.token);
+      setIsLoggedIn(true);
+      setUserData({ email: data.email, username: data.username });
+      setFormValues({ ...initialValues });
+      setFormErrors({});
+      setModalState(MODAL_STATES.CLOSED);
+    } catch (err) {
+      const msg = err.serverMessage;
+      if (msg === "User doesn't exist") {
+        setApiError("No account found with this email");
+      } else if (msg === "Incorrect password") {
+        setApiError("Incorrect password");
+      } else {
+        setApiError("Login failed, please try again");
+      }
+    }
   };
 
   return {
@@ -140,6 +161,7 @@ export const useForm = () => {
     setFormErrors,
     setFormValues,
     isValid,
+    apiError,
     handleRegisterChange,
     handleRegister,
     handleLoginChange,
